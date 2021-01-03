@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>初识nodejs | happy coding</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="have fun with coding">
+    
+    <link rel="preload" href="/assets/css/0.styles.5b2ad578.css" as="style"><link rel="preload" href="/assets/js/app.94b461fa.js" as="script"><link rel="preload" href="/assets/js/2.5be9efca.js" as="script"><link rel="preload" href="/assets/js/13.b142e5d4.js" as="script"><link rel="prefetch" href="/assets/js/10.a4e8cb58.js"><link rel="prefetch" href="/assets/js/11.4fa810a3.js"><link rel="prefetch" href="/assets/js/12.7076bf3f.js"><link rel="prefetch" href="/assets/js/14.025fb1ce.js"><link rel="prefetch" href="/assets/js/15.188f7a0a.js"><link rel="prefetch" href="/assets/js/16.e21d937e.js"><link rel="prefetch" href="/assets/js/17.a33a86e2.js"><link rel="prefetch" href="/assets/js/18.5a3baa3a.js"><link rel="prefetch" href="/assets/js/19.ebb61865.js"><link rel="prefetch" href="/assets/js/20.f8e29efd.js"><link rel="prefetch" href="/assets/js/3.3fb33442.js"><link rel="prefetch" href="/assets/js/4.4827a1f8.js"><link rel="prefetch" href="/assets/js/5.1c54c189.js"><link rel="prefetch" href="/assets/js/6.15c0cadb.js"><link rel="prefetch" href="/assets/js/7.6900bd78.js"><link rel="prefetch" href="/assets/js/8.d888e939.js"><link rel="prefetch" href="/assets/js/9.74a365ea.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.5b2ad578.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">happy coding</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="blog" class="dropdown-title"><span class="title">blog</span> <span class="arrow down"></span></button> <button type="button" aria-label="blog" class="mobile-dropdown-title"><span class="title">blog</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue3/" class="nav-link">
+  最新
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  about
+</a></li></ul></div></div> <a href="https://github.com/GCGligoudan" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="blog" class="dropdown-title"><span class="title">blog</span> <span class="arrow down"></span></button> <button type="button" aria-label="blog" class="mobile-dropdown-title"><span class="title">blog</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue3/" class="nav-link">
+  最新
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  about
+</a></li></ul></div></div> <a href="https://github.com/GCGligoudan" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/vue3/" class="sidebar-link">关于vue3你需要知道的事</a></li><li><a href="/vue_jsx/" class="sidebar-link">vue中的渲染函数/jsx和插槽slot</a></li><li><a href="/vue_jwt/" class="sidebar-link">vue-router结合vuex实现用户权限控制</a></li><li><a href="/leetcode/" class="sidebar-link">常见leetCode算法题目分享</a></li><li><a href="/vue_validate_mixin/" class="sidebar-link">使用vue中的mixin功能优化表单校验插件</a></li><li><a href="/vue_validate/" class="sidebar-link">使用vue自定义指令来开发一个表单验证插件</a></li><li><a href="/vue_test/" class="sidebar-link">vue单元测试vue test utils使用初探</a></li><li><a href="/node/" aria-current="page" class="active sidebar-link">初识nodejs</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/node/#_1-process" class="sidebar-link">1. process</a></li><li class="sidebar-sub-header"><a href="/node/#_2-fs文件系统" class="sidebar-link">2. fs文件系统</a></li><li class="sidebar-sub-header"><a href="/node/#_3-模块化module-exports和require" class="sidebar-link">3.模块化module.exports和require</a></li><li class="sidebar-sub-header"><a href="/node/#_4-http模块" class="sidebar-link">4. http模块</a></li></ul></li><li><a href="/mxgraph/" class="sidebar-link">mxgraph入门解析</a></li><li><a href="/webpack4/" class="sidebar-link">webpack4配置入门和多文件打包</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="简介"><a href="#简介" class="header-anchor">#</a> 简介</h1> <p>前端工程师需要学习nodejs来扩充自己的知识边界，也让自己更方便的理解webpack，前端工程化等。
+</p> <h2 id="_1-process"><a href="#_1-process" class="header-anchor">#</a> 1. process</h2> <p>process对象是node中的一个全局变量，它提供了nodejs进程的信息并对其进行控制，作为全局变量，process始终可以直接使用。</p> <p>argv是我们常会见到一个属性，process.argv返回一个数组，包含了在运行node代码时命令行中输入的值。举个例子假如我们运行一段node代码，并在命令行中添加一些参数：<code>$ node app.js xiaoming 2</code>，那么process.argv的值即为<code>['node', '/path/to/your/app.js', 'xiaoming', 2]</code>。</p> <p>这个属性值还是比较常见的，在vue-cli2中的webpack配置中就使用到了。根据后面的参数来判断当前是启动的是开发还是打包、测试等环境，来加载不同的webpack配置。有兴趣的可以自行vue的webpack配置代码中去查看。</p> <h2 id="_2-fs文件系统"><a href="#_2-fs文件系统" class="header-anchor">#</a> 2. fs文件系统</h2> <p>node作为后端程序，i/o处理能力自然是其核心能力之一。fs模块提供了一个可以与文件系统进行交互的api，所有的文件操作都同时具有同步和异步两种方式。使用时需要先引入fs模块<code>const fs = require('fs');</code>。</p> <h3 id="_2-1-readfile和readfilesync"><a href="#_2-1-readfile和readfilesync" class="header-anchor">#</a> 2.1 readFile和readFileSync</h3> <p><code>fs.readFile('/path/to/file/',()=&gt;{})</code>和<code>fs.readFileSync('/path/to/file/')</code>，分别是fs操作文件系统的异步（不阻塞）和同步（阻塞）两种方法。node中只要是以<code>sync</code>结尾的方法皆为同步（阻塞）操作。</p> <p>用法简介：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">const</span> fs <span class="token operator">=</span>  <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 1.异步读取文件，读取的数据在其回调函数中</span>
+fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'/path/to/file'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+  <span class="token comment">// res表示异步读取文件内容，默认是buffer格式</span>
+  <span class="token comment">// 对获取res文件添加状态监听</span>
+  res<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'data'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    result <span class="token operator">+=</span> data<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 监听res的end状态，表示文件读取完毕了</span>
+  res<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 此时的result表示获取的全部文件内容</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// 2.同步读取文件</span>
+<span class="token keyword">const</span> data <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">readFileSync</span><span class="token punctuation">(</span><span class="token string">'/path/to/file/'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>我们可以看到，获取文件内容时，默认是一种buffer格式，这个格式是node中为了处理tcp流和文件系统操作中的二进制数据而引入的api。</p> <h3 id="_2-2-readdir和readdirsync"><a href="#_2-2-readdir和readdirsync" class="header-anchor">#</a> 2.2 readdir和readdirSync</h3> <p>这两个函数的使用方法和readFile、readFileSync相似，读取一个文件路径，返回的是一个相应文件目录下的文件名称的数组。使用方法分别为<code>fs.readdir('/filePath',(err, list)=&gt;{ });</code>和<code>const list = fs.readdirSync('/filePath');</code></p> <h2 id="_3-模块化module-exports和require"><a href="#_3-模块化module-exports和require" class="header-anchor">#</a> 3.模块化module.exports和require</h2> <p>上面我们看到，在node中如何想使用其他模块，方式是使用require引入。其实在node中，我们也可以开发自己的模块并引入使用。</p> <p>示例代码：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// module.js</span>
+module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// 这里开发自己模块的逻辑</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// your program</span>
+<span class="token keyword">const</span> myModule <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'module.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">...</span>
+</code></pre></div><p>在开发自己模块的时候有几个原则：</p> <p>1.导出一个函数，这个函数可以准确接受自己所需要的参数</p> <p>2.模块程序不要改变其他任何东西，比如全局变量</p> <p>3.不要在模块中做任何输出，应该将处理的结果返回出去由使用的程序处理</p> <p>4.如果自己的模块是个异步操作，则接受的参数中需要有回调函数callback</p> <p>5.当有错误发生，或者有数据的时候使用回调函数进行处理</p> <p>6.回调函数需按照node习惯，err错误处理作为函数的第一个参数function callback(err, data){}</p> <h2 id="_4-http模块"><a href="#_4-http模块" class="header-anchor">#</a> 4. http模块</h2> <p>http模块是node最重要的核心功能之一，可以用来处理http请求和生成一个简单的http服务。先来看一下使用http模块的几个简单应用场景。</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// 引入</span>
+<span class="token keyword">const</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 1.发起一个简单的http请求</span>
+http<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/url'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token comment">// res参数是node中的stream类型对象</span>
+  <span class="token comment">// 可以理解成会触发一些事件的对象</span>
+  res<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'data'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// 对res进行监听，获取到的data是buffer对象</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 2.生成一个本地的server，端口为3000</span>
+<span class="token keyword">const</span>  server <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token comment">// req表示请求，res表示响应</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+server<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h1 id="参考文章"><a href="#参考文章" class="header-anchor">#</a> 参考文章</h1> <p><a href="https://nodeschool.io" target="_blank" rel="noopener noreferrer">learnyounode官网<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <p><a href="http://nodejs.cn/api/" target="_blank" rel="noopener noreferrer">node中文官网<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <hr> <p><em>作者简介： 宫晨光，人和未来大数据前端工程师。</em></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue_test/" class="prev">
+        vue单元测试vue test utils使用初探
+      </a></span> <span class="next"><a href="/mxgraph/">
+        mxgraph入门解析
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.94b461fa.js" defer></script><script src="/assets/js/2.5be9efca.js" defer></script><script src="/assets/js/13.b142e5d4.js" defer></script>
+  </body>
+</html>

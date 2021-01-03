@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vue-router结合vuex实现用户权限控制 | happy coding</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="have fun with coding">
+    
+    <link rel="preload" href="/assets/css/0.styles.5b2ad578.css" as="style"><link rel="preload" href="/assets/js/app.94b461fa.js" as="script"><link rel="preload" href="/assets/js/2.5be9efca.js" as="script"><link rel="preload" href="/assets/js/16.e21d937e.js" as="script"><link rel="prefetch" href="/assets/js/10.a4e8cb58.js"><link rel="prefetch" href="/assets/js/11.4fa810a3.js"><link rel="prefetch" href="/assets/js/12.7076bf3f.js"><link rel="prefetch" href="/assets/js/13.b142e5d4.js"><link rel="prefetch" href="/assets/js/14.025fb1ce.js"><link rel="prefetch" href="/assets/js/15.188f7a0a.js"><link rel="prefetch" href="/assets/js/17.a33a86e2.js"><link rel="prefetch" href="/assets/js/18.5a3baa3a.js"><link rel="prefetch" href="/assets/js/19.ebb61865.js"><link rel="prefetch" href="/assets/js/20.f8e29efd.js"><link rel="prefetch" href="/assets/js/3.3fb33442.js"><link rel="prefetch" href="/assets/js/4.4827a1f8.js"><link rel="prefetch" href="/assets/js/5.1c54c189.js"><link rel="prefetch" href="/assets/js/6.15c0cadb.js"><link rel="prefetch" href="/assets/js/7.6900bd78.js"><link rel="prefetch" href="/assets/js/8.d888e939.js"><link rel="prefetch" href="/assets/js/9.74a365ea.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.5b2ad578.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">happy coding</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="blog" class="dropdown-title"><span class="title">blog</span> <span class="arrow down"></span></button> <button type="button" aria-label="blog" class="mobile-dropdown-title"><span class="title">blog</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue3/" class="nav-link">
+  最新
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  about
+</a></li></ul></div></div> <a href="https://github.com/GCGligoudan" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="blog" class="dropdown-title"><span class="title">blog</span> <span class="arrow down"></span></button> <button type="button" aria-label="blog" class="mobile-dropdown-title"><span class="title">blog</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue3/" class="nav-link">
+  最新
+</a></li><li class="dropdown-item"><!----> <a href="/about/" class="nav-link">
+  about
+</a></li></ul></div></div> <a href="https://github.com/GCGligoudan" target="_blank" rel="noopener noreferrer" class="repo-link">
+    Github
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/vue3/" class="sidebar-link">关于vue3你需要知道的事</a></li><li><a href="/vue_jsx/" class="sidebar-link">vue中的渲染函数/jsx和插槽slot</a></li><li><a href="/vue_jwt/" aria-current="page" class="active sidebar-link">vue-router结合vuex实现用户权限控制</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vue_jwt/#_1-前言" class="sidebar-link">1. 前言</a></li><li class="sidebar-sub-header"><a href="/vue_jwt/#_2-服务端准备工作" class="sidebar-link">2.服务端准备工作</a></li><li class="sidebar-sub-header"><a href="/vue_jwt/#_3-项目中axios封装" class="sidebar-link">3.项目中axios封装</a></li><li class="sidebar-sub-header"><a href="/vue_jwt/#_4-vuex记录用户登录" class="sidebar-link">4.vuex记录用户登录</a></li><li class="sidebar-sub-header"><a href="/vue_jwt/#_5-vuex配合vue-router实现登录校验" class="sidebar-link">5.vuex配合vue-router实现登录校验</a></li><li class="sidebar-sub-header"><a href="/vue_jwt/#_6-vue-router钩子实现用户权限控制" class="sidebar-link">6.vue-router钩子实现用户权限控制</a></li><li class="sidebar-sub-header"><a href="/vue_jwt/#_7-总结" class="sidebar-link">7. 总结</a></li></ul></li><li><a href="/leetcode/" class="sidebar-link">常见leetCode算法题目分享</a></li><li><a href="/vue_validate_mixin/" class="sidebar-link">使用vue中的mixin功能优化表单校验插件</a></li><li><a href="/vue_validate/" class="sidebar-link">使用vue自定义指令来开发一个表单验证插件</a></li><li><a href="/vue_test/" class="sidebar-link">vue单元测试vue test utils使用初探</a></li><li><a href="/node/" class="sidebar-link">初识nodejs</a></li><li><a href="/mxgraph/" class="sidebar-link">mxgraph入门解析</a></li><li><a href="/webpack4/" class="sidebar-link">webpack4配置入门和多文件打包</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="_1-前言"><a href="#_1-前言" class="header-anchor">#</a> 1. 前言</h2> <p>今天来整理下最近学习到的vue-router配合vuex来实现用户权限校验，希望对大家也能有所帮助。</p> <h2 id="_2-服务端准备工作"><a href="#_2-服务端准备工作" class="header-anchor">#</a> 2.服务端准备工作</h2> <p>为了实现前端校验用户，后端需要在用户登录的时候记录下该用户的状态并加密之后返回给前端。之后该用户的所有请求都应该附带这个加密后的状态，后端取到这个状态解密，并与之前保存的状态对比，以此来判断该用户是否登录或合法。</p> <p>我这里使用了node简单了写了个本地的express服务，来实现上述功能。完整的代码直接贴出来：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// server.js</span>
+<span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> bodyParser <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'body-parser'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> jwt <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'jsonwebtoken'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// secret是后端加密的密钥</span>
+<span class="token keyword">const</span> secret <span class="token operator">=</span> <span class="token string">'rhwl'</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">'Access-Control-Allow-Origin'</span><span class="token punctuation">,</span> <span class="token string">'*'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">'Access-Control-Allow-Methods'</span><span class="token punctuation">,</span> <span class="token string">'GET,HEAD,OPTIONS,POST,PUT'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res<span class="token punctuation">.</span><span class="token function">header</span><span class="token punctuation">(</span><span class="token string">'Access-Control-Allow-Headers'</span><span class="token punctuation">,</span> <span class="token string">'Origin, X-Requested-With, Content-Type, Accept, Authorization'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>req<span class="token punctuation">.</span>method<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'options'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>bodyParser<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> username <span class="token punctuation">}</span> <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>username <span class="token operator">===</span> <span class="token string">'admin'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 如果是合法用户，使用jwt进行加密生成token</span>
+    res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      code<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      username<span class="token operator">:</span> <span class="token string">'admin'</span><span class="token punctuation">,</span>
+      token<span class="token operator">:</span> jwt<span class="token punctuation">.</span><span class="token function">sign</span><span class="token punctuation">(</span><span class="token punctuation">{</span> username<span class="token operator">:</span> <span class="token string">'admin'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> secret<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        expiresIn<span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      code<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      data<span class="token operator">:</span> <span class="token string">'用户名不存在'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/validate'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> token <span class="token operator">=</span> req<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>authorization<span class="token punctuation">;</span> <span class="token comment">// 在请求头中附带token信息</span>
+  jwt<span class="token punctuation">.</span><span class="token function">verify</span><span class="token punctuation">(</span>token<span class="token punctuation">,</span> secret<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err<span class="token punctuation">,</span> decode</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token comment">// 验证token是否合法</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        code<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        data<span class="token operator">:</span> <span class="token string">'当前token无效'</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 如果验证合法，重新生成新的token，并返回信息</span>
+    res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      username<span class="token operator">:</span> decode<span class="token punctuation">.</span>username<span class="token punctuation">,</span>
+      code<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      token<span class="token operator">:</span> jwt<span class="token punctuation">.</span><span class="token function">sign</span><span class="token punctuation">(</span><span class="token punctuation">{</span> username<span class="token operator">:</span> <span class="token string">'admin'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> secret<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        expiresIn<span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'服务器在3000端口运行'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="_3-项目中axios封装"><a href="#_3-项目中axios封装" class="header-anchor">#</a> 3.项目中axios封装</h2> <p>然后我们在项目中封装符合自己需求的ajax请求，现在通常都是基于axios库。在自己封装的ajax插件中，要在每次的请求头中添加上token。代码实现：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// ajaxResquest.js</span>
+<span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ajaxResquest</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// 根据当前模式自动切换baseURL</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>baseURL <span class="token operator">=</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">NODE_ENV</span> <span class="token operator">===</span> <span class="token string">'development'</span> <span class="token operator">?</span> <span class="token string">'http://localhost:3000'</span> <span class="token operator">:</span> <span class="token string">'/'</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>timeout <span class="token operator">=</span> <span class="token number">5000</span><span class="token punctuation">;</span> <span class="token comment">// 设置请求超时为5s</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">request</span><span class="token punctuation">(</span><span class="token parameter">config</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">const</span> instance <span class="token operator">=</span> axios<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            baseURL<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>baseURL<span class="token punctuation">,</span>
+            timeout<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>timeout<span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        instance<span class="token punctuation">.</span>interceptor<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">config</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 将保存在本地的token添加到每次请求的请求头中</span>
+            <span class="token comment">// 这样就可以实现在请求时顺带附加用户的校验信息的需求</span>
+            config<span class="token punctuation">.</span>headers<span class="token punctuation">.</span>Authorization <span class="token operator">=</span> localStorage<span class="token punctuation">.</span><span class="token function">getItem</span><span class="token punctuation">(</span><span class="token string">'token'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> config<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        instance<span class="token punctuation">.</span>interceptor<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span>res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> req<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 将使用request时候需要的参数也添加到instance中</span>
+        <span class="token keyword">return</span> <span class="token function">instance</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">new</span> <span class="token class-name">ajaxRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>然后统一管理项目api接口：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// api.js</span>
+<span class="token keyword">import</span> ajax <span class="token keyword">from</span> <span class="token string">'ajaxResquest'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">userLogin</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">username</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ajax<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token operator">:</span> <span class="token string">'/login'</span><span class="token punctuation">,</span> method<span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span> data<span class="token operator">:</span> <span class="token punctuation">{</span>
+    username<span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token function-variable function">userValidate</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> ajax<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token operator">:</span> <span class="token string">'/validate'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>接下来我们在项目中具体实现用户登陆和权限校验的需求。</p> <h2 id="_4-vuex记录用户登录"><a href="#_4-vuex记录用户登录" class="header-anchor">#</a> 4.vuex记录用户登录</h2> <p>先将登陆组件配合vuex使用来触发用户登陆的行为，并且将用户登录之后的信息保存在vuex中，登陆组件的代码：</p> <div class="language- extra-class"><pre class="language-text"><code>// userLogin component
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;el-input style=&quot;width:200px&quot; v-model=&quot;username&quot;&gt;&lt;/el-input&gt;
+        &lt;el-button @click=&quot;login&quot;&gt;登录&lt;/el-button&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+    data(){
+        return {
+            username: '',
+        }
+    },
+    methods: {
+        login(){
+            // 这里触发vuex中的actions，在vuex中调用用户登陆接口
+            // 从而将用户登陆之后的状态保存至vuex中
+            this.$store.dispatch('login', this.username).then((data) =&gt; {
+                // 登陆成功之后，路由跳转至用户账户页或者进行你需要的操作
+                this.$router.push('/profile');
+            });
+        }
+    }
+}
+&lt;/script&gt;
+</code></pre></div><p>接着是vuex的store.js</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token comment">// store.js</span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>userLogin<span class="token punctuation">,</span> userValidate<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'api.js'</span><span class="token punctuation">;</span>
+
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> Vuex<span class="token punctuation">.</span><span class="token function">store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    state<span class="token operator">:</span> <span class="token punctuation">{</span>
+        username<span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>  
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    mutations<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token function">setUsername</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> username</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            state<span class="token punctuation">.</span>username <span class="token operator">=</span> username<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    actions<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token keyword">async</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>commit<span class="token punctuation">}</span><span class="token punctuation">,</span> username</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">userLogin</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 登录失败</span>
+                <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// 登录成功后将接口返回的token保存在本地</span>
+            localStorage<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span><span class="token string">'token'</span><span class="token punctuation">,</span> res<span class="token punctuation">.</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 将用户名保存在vuex中</span>
+            <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'setUsername'</span><span class="token punctuation">,</span> username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>经过上面的操作，我们将用户登录中调用登录接口的操作通过vuex实现，将成功登录后的用户名保存在vuex中，此时的token保存在浏览器本地。但是vuex中的数据并不是持久数据，刷新之后保存的用户名就会消失，接下来我们实现刷新页面或者路由跳转时进行用户校验，如果教程成功则会生成新的token和username并保存。</p> <h2 id="_5-vuex配合vue-router实现登录校验"><a href="#_5-vuex配合vue-router实现登录校验" class="header-anchor">#</a> 5.vuex配合vue-router实现登录校验</h2> <p>当用户刷新页面时，或者点击其他页面切换路由router时，需要调用后端的validate接口，该接口通过保存已保存的token校验当前用户是否合法。我们在vuex的store.js中添加以下代码：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">export</span> <span class="token keyword">default</span> Vuex<span class="token punctuation">.</span><span class="token function">store</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    state<span class="token operator">:</span> <span class="token punctuation">{</span>
+        username<span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    mutations<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token function">setUsername</span><span class="token punctuation">(</span><span class="token parameter">state<span class="token punctuation">,</span> username</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            state<span class="token punctuation">.</span>username <span class="token operator">=</span> username<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>  
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    actions<span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token keyword">async</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>commit<span class="token punctuation">}</span><span class="token punctuation">,</span> username</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token operator">...</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token keyword">async</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>commit<span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 调用userValidate时，会将</span>
+            <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">userValidate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>code <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 此时用户校验失败</span>
+                <span class="token keyword">return</span> Promise<span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// 如果校验成功，重新保存token和username </span>
+            localStorage<span class="token punctuation">.</span><span class="token function">setItem</span><span class="token punctuation">(</span><span class="token string">'token'</span><span class="token punctuation">,</span> res<span class="token punctuation">.</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">commit</span><span class="token punctuation">(</span><span class="token string">'setUsername'</span><span class="token punctuation">,</span> res<span class="token punctuation">.</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><p>基本上我们通过上面的代码就实现了用户权限控制所需要的所有前提操作：</p> <ul><li>用户成功登陆在本地保存token</li> <li>在自己封装的ajax的请求头部添加保存的token信息</li> <li>后端服务提供对前端token的校验能力</li></ul> <p>那么接下来就就是路由router刷新或改变的时候如何进行权限控制了。</p> <h2 id="_6-vue-router钩子实现用户权限控制"><a href="#_6-vue-router钩子实现用户权限控制" class="header-anchor">#</a> 6.vue-router钩子实现用户权限控制</h2> <p>使用过vue-router的同学们都知道，路有也是有钩子函数的，在官方文档里面被称为<a href="https://router.vuejs.org/zh/guide/advanced/navigation-guards.html" target="_blank" rel="noopener noreferrer">导航守卫<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>。导航守卫允许我们可以精准的在每个路由变化的时候进行操作，我们就这里判断用户权限。我们在这个vue项目的的main.js中修改代码：</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App.vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./store'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ElementUI <span class="token keyword">from</span> <span class="token string">'element-ui'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'element-ui/lib/theme-chalk/index.css'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 在这里使用路由的导航守卫进行权限控制</span>
+<span class="token comment">// 可以自定义不需要校验用户的路由白名单</span>
+<span class="token keyword">const</span> whiteList <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'/'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+router<span class="token punctuation">.</span><span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token keyword">async</span>  <span class="token punctuation">(</span><span class="token parameter">to<span class="token punctuation">,</span> <span class="token keyword">from</span><span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 要去的页面是白名单，直接跳转</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>whiteList<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>to<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 不是白名单，调用vuex中的validate行为</span>
+    <span class="token keyword">const</span> flag <span class="token operator">=</span> <span class="token keyword">await</span> store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token string">'validate'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>flag<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 用户校验通过，直接跳转</span>
+        <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token comment">// 用户校验失败</span>
+        <span class="token function">next</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 跳转至用户登陆页</span>
+        <span class="token comment">// 顺带说一下，这里还可以在router中的meta属性中添加isNeeded: true/false</span>
+        <span class="token comment">// 然后配合这个属性更加精细的控制未通过用户校验时的页面是否允许跳转</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// vuex</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>ElementUI<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>productionTip <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+<span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    router<span class="token punctuation">,</span>
+    store<span class="token punctuation">,</span>
+    <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token parameter">h</span> <span class="token operator">=&gt;</span> <span class="token function">h</span><span class="token punctuation">(</span>App<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">$mount</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h2 id="_7-总结"><a href="#_7-总结" class="header-anchor">#</a> 7. 总结</h2> <p>通过上面的代码，我们就基本上实现了需要的用户权限校验。整个过程涉及的东西比较多，大家也可以各取所需只拿自己需要的部分进行开发即可。希望这些内容能给大家开发带来一点思路。
+这次分享的内容来源于某家的vue高级课程，由本人进行整理和分享~</p> <hr> <p><em>作者简介： 宫晨光，<a href="http://www.genetalks.com/about-us.html" target="_blank" rel="noopener noreferrer">人和未来<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>大数据前端工程师。</em></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue_jsx/" class="prev">
+        vue中的渲染函数/jsx和插槽slot
+      </a></span> <span class="next"><a href="/leetcode/">
+        常见leetCode算法题目分享
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.94b461fa.js" defer></script><script src="/assets/js/2.5be9efca.js" defer></script><script src="/assets/js/16.e21d937e.js" defer></script>
+  </body>
+</html>
